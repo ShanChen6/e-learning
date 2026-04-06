@@ -1,0 +1,25 @@
+{
+  "name": "elearning",
+  "version": "1.0.0",
+  "packageManager": "npm@11.12.1",
+  "private": true,
+  "description": "Hệ thống eLearning xây dựng bằng NestJS và Next.js",
+  "author": "shandev",
+  "license": "ISC",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "turbo": "^2.9.4"
+  }
+}
