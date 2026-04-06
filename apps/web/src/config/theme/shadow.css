@@ -1,0 +1,103 @@
+/*
+ * Shadow tokens – eLearning
+ *
+ * Design language: soft, layered shadows on a light background.
+ * Color: derived from --color-overlay-black (rgba(0,0,0,0.4)) split
+ *        into opacity tiers so lighter shadows use less alpha.
+ *
+ * 4 elevation levels:
+ *   sm  – subtle lift (cards at rest, input borders)
+ *   md  – visible depth (dropdowns, hovered cards)
+ *   lg  – prominent float (modals, side panels)
+ *   xl  – maximum depth (full-screen overlays, drawer backdrops)
+ *
+ * Brand-tinted glow variant:
+ *   brand – primary indigo glow (CTA buttons, active states)
+ *   teal  – teal glow (secondary CTA, progress indicators)
+ */
+
+@theme inline {
+  /* ─── Base shadow color stops ────────────────────────────────── */
+  /* Decomposed from --color-overlay-black = rgba(0,0,0,0.4)       */
+  --shadow-color-xs:  rgba(23, 27, 65, 0.06);  /* neutral-900 tinted */
+  --shadow-color-sm:  rgba(23, 27, 65, 0.10);
+  --shadow-color-md:  rgba(23, 27, 65, 0.16);
+  --shadow-color-lg:  rgba(23, 27, 65, 0.22);
+  --shadow-color-xl:  rgba(23, 27, 65, 0.32);
+
+  /* ─── Elevation shadows ──────────────────────────────────────── */
+
+  /* sm – subtle lift (cards at rest, inputs on focus) */
+  --shadow-sm:
+    0px 1px 2px  var(--shadow-color-xs),
+    0px 1px 3px  var(--shadow-color-sm);
+
+  /* md – visible depth (hovered cards, dropdowns) */
+  --shadow-md:
+    0px 2px 4px  var(--shadow-color-xs),
+    0px 4px 8px  var(--shadow-color-md);
+
+  /* lg – prominent float (dialogs, popovers, side sheets) */
+  --shadow-lg:
+    0px 4px  8px  var(--shadow-color-sm),
+    0px 8px  20px var(--shadow-color-md),
+    0px 16px 32px var(--shadow-color-lg);
+
+  /* xl – maximum depth (modals, full-panel overlays) */
+  --shadow-xl:
+    0px 8px  16px var(--shadow-color-sm),
+    0px 16px 32px var(--shadow-color-lg),
+    0px 32px 64px var(--shadow-color-xl);
+
+  /* ─── Brand-tinted glow shadows ─────────────────────────────── */
+
+  /* brand – indigo glow for primary CTAs and active elements */
+  --shadow-brand-sm:
+    0px 1px 3px  rgba(84, 90, 232, 0.12),
+    0px 4px 12px rgba(84, 90, 232, 0.20);
+
+  --shadow-brand-md:
+    0px 2px 6px  rgba(84, 90, 232, 0.18),
+    0px 8px 24px rgba(84, 90, 232, 0.28);
+
+  /* teal – teal glow for secondary CTA and progress indicators */
+  --shadow-teal-sm:
+    0px 1px 3px  rgba(73, 187, 189, 0.14),
+    0px 4px 12px rgba(73, 187, 189, 0.22);
+
+  --shadow-teal-md:
+    0px 2px 6px  rgba(73, 187, 189, 0.20),
+    0px 8px 24px rgba(73, 187, 189, 0.30);
+
+  /* ─── Inset (inner shadow) ───────────────────────────────────── */
+  --shadow-inset:
+    inset 0px 1px 3px var(--shadow-color-sm);
+
+  /* ─── Semantic aliases ───────────────────────────────────────── */
+  --shadow-card:    var(--shadow-sm);        /* card at rest         */
+  --shadow-card-hover: var(--shadow-md);     /* card on hover        */
+  --shadow-dropdown: var(--shadow-md);       /* dropdown menus       */
+  --shadow-popover:  var(--shadow-lg);       /* popovers, tooltips   */
+  --shadow-modal:    var(--shadow-xl);       /* dialog modals        */
+  --shadow-btn:      var(--shadow-brand-sm); /* primary button glow  */
+  --shadow-input:    var(--shadow-inset);    /* input inner shadow   */
+}
+
+/* ─── @utility shorthands ────────────────────────────────────────── */
+@utility shadow-card       { box-shadow: var(--shadow-card);       }
+@utility shadow-card-hover { box-shadow: var(--shadow-card-hover); }
+@utility shadow-dropdown   { box-shadow: var(--shadow-dropdown);   }
+@utility shadow-popover    { box-shadow: var(--shadow-popover);    }
+@utility shadow-modal      { box-shadow: var(--shadow-modal);      }
+@utility shadow-btn        { box-shadow: var(--shadow-btn);        }
+@utility shadow-btn-teal   { box-shadow: var(--shadow-teal-sm);    }
+@utility shadow-input      { box-shadow: var(--shadow-input);      }
+
+/* ─── Dark mode overrides ────────────────────────────────────────── */
+.dark {
+  --shadow-color-xs: rgba(0, 0, 0, 0.18);
+  --shadow-color-sm: rgba(0, 0, 0, 0.28);
+  --shadow-color-md: rgba(0, 0, 0, 0.40);
+  --shadow-color-lg: rgba(0, 0, 0, 0.55);
+  --shadow-color-xl: rgba(0, 0, 0, 0.70);
+}

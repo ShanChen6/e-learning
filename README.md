@@ -78,8 +78,4 @@ npm run dev
 ## License
 Xem trường `license` trong `package.json`.
 
----
-Nếu bạn muốn, tôi có thể:
-- Thêm hướng dẫn chạy Docker DB chi tiết (nếu cần biến môi trường).
-- Viết ví dụ env file cho `apps/api`.
 
