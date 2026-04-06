@@ -1,0 +1,200 @@
+/*
+ * Typography utilities – eLearning (Figma: Poppins + Nunito Sans)
+ *
+ * Figma text styles summary:
+ *   Poppins  – headings, UI labels, body copy
+ *   Nunito Sans – display hero, badges, scores
+ *
+ * Font-size / weight combos from Figma:
+ *   60px / 700  → Hero display
+ *   40px / 600  → Display large
+ *   36px / 700  → Display medium
+ *   32px / 700  → Logo / prominent
+ *   26px / 400-500 → Subtitle / lead
+ *   22px / 400-600 → Body large
+ *   20px / 400  → Body medium
+ *   18px / 400  → Body small
+ *   11px–10px / 600 → Badge / label
+ */
+
+/* ─── Display ─────────────────────────────────────────────────────── */
+@utility text-display-hero {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-9xl);   /* 60px */
+  line-height: var(--leading-9xl);     /* 88px */
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-display-xl {
+  font-size:   var(--font-size-6xl);   /* 40px */
+  line-height: var(--leading-7xl);     /* 64px – 160% */
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-display-lg {
+  font-size:   var(--font-size-5xl);   /* 36px */
+  line-height: var(--leading-6xl);     /* 56px – 160% */
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-display-md {
+  font-size:   var(--font-size-4xl);   /* 32px */
+  line-height: var(--leading-5xl);     /* 48px – 180% */
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ─── Heading (Poppins, variadic weight via -*) ───────────────────── */
+@utility text-h1-* {
+  font-size:   var(--font-size-3xl);   /* 26px */
+  line-height: var(--leading-5xl);     /* 48px – ~180% */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-h2-* {
+  font-size:   var(--font-size-xl);    /* 22px */
+  line-height: var(--leading-3xl);     /* 40px – ~180% */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-h3-* {
+  font-size:   var(--font-size-lg);    /* 20px */
+  line-height: var(--leading-3xl);     /* 40px – ~180% */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-h4-* {
+  font-size:   var(--font-size-md);    /* 18px */
+  line-height: var(--leading-xl);      /* 32px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Subtitle / Lead paragraph ──────────────────────────────────── */
+@utility text-subtitle-* {
+  font-size:   var(--font-size-xl);    /* 22px */
+  line-height: var(--leading-3xl);     /* 40px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Body copy ───────────────────────────────────────────────────── */
+@utility text-body-large-* {
+  font-size:   var(--font-size-lg);    /* 20px */
+  line-height: var(--leading-3xl);     /* 40px – 180% */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-body-medium-* {
+  font-size:   var(--font-size-md);    /* 18px */
+  line-height: var(--leading-xl);      /* 32px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-body-small-* {
+  font-size:   var(--font-size-sm);    /* 14px */
+  line-height: var(--leading-lg);      /* 28px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* ─── Button labels ───────────────────────────────────────────────── */
+@utility text-button-large-* {
+  font-size:   var(--font-size-lg);    /* 20px */
+  line-height: var(--leading-md);      /* 24px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-button-medium-* {
+  font-size:   var(--font-size-md);    /* 18px */
+  line-height: var(--leading-md);      /* 24px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+@utility text-button-small-* {
+  font-size:   var(--font-size-base);  /* 16px */
+  line-height: var(--leading-md);      /* 24px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Caption / Label ─────────────────────────────────────────────── */
+@utility text-caption-* {
+  font-size:   var(--font-size-xs);    /* 12px */
+  line-height: var(--leading-xs);      /* 16px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-normal);
+}
+
+/* ─── Badge / Score (Nunito Sans small) ──────────────────────────── */
+@utility text-badge-* {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-2xs);   /* 10px */
+  line-height: var(--leading-2xs);     /* 14px */
+  font-weight: --value(--font-weight-*);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* ─── Buenos Aires Trial – Our Success stats (Figma audit) ──────── */
+@utility text-stat-number {
+  font-family: var(--font-serif);
+  font-size:   var(--font-size-11xl);  /* 96px */
+  line-height: var(--leading-10xl);    /* 96px */
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--tracking-tight);
+}
+
+@utility text-stat-label {
+  font-family: var(--font-serif);
+  font-size:   var(--font-size-4xl);   /* 32px */
+  line-height: var(--leading-2xl);     /* 36px */
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-normal);
+}
+
+@utility text-section-hero {
+  font-family: var(--font-serif);
+  font-size:   var(--font-size-7xl);   /* 48px */
+  line-height: var(--leading-7xl);     /* 64px */
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Roboto – Explore Course section (Figma audit) ─────────────── */
+@utility text-course-heading {
+  font-family: var(--font-content);
+  font-size:   var(--font-size-6xl);   /* 40px */
+  line-height: var(--leading-7xl);     /* 64px */
+  font-weight: var(--font-weight-bold);
+}
+
+@utility text-course-subtitle {
+  font-family: var(--font-content);
+  font-size:   var(--font-size-2xl);   /* 24px */
+  line-height: var(--leading-3xl);     /* 40px */
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Nunito Sans display utilities ──────────────────────────────── */
+@utility text-nunito-lg {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-2xl);   /* 24px */
+  line-height: var(--leading-3xl);     /* 40px */
+  font-weight: var(--font-weight-semibold);
+}
+
+@utility text-nunito-xl {
+  font-family: var(--font-display);
+  font-size:   var(--font-size-5xl);   /* 36px */
+  line-height: var(--leading-6xl);     /* 56px */
+  font-weight: var(--font-weight-bold);
+}

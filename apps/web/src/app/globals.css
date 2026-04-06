@@ -1,23 +1,77 @@
 @import "tailwindcss";
+@import "../config/theme/index.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Base element resets using theme tokens ─────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior:         smooth;
+  text-size-adjust:        100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: var(--app-bg);
+  color:            var(--app-text);
+  font-family:      var(--font-sans);
+  font-size:        var(--font-size-base);   /* 16px */
+  line-height:      var(--leading-md);       /* 24px */
+  min-height:       100dvh;
 }
+
+/* ─── Typography base ────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-bold);
+  color:       var(--color-text-neutral-primary);
+  line-height: var(--leading-xl);
+}
+
+p {
+  color:       var(--color-text-neutral-secondary);
+  line-height: var(--leading-lg);   /* 28px – comfortable reading */
+}
+
+a {
+  color:           var(--color-text-brand-primary);
+  text-decoration: none;
+  transition:      color 150ms ease;
+}
+
+a:hover {
+  color: var(--color-text-brand-secondary);
+}
+
+/* ─── Focus ring (keyboard navigation) ───────────────────────────── */
+:focus-visible {
+  outline:        2px solid var(--app-ring);
+  outline-offset: 2px;
+  border-radius:  var(--radius-sm);
+}
+
+/* ─── Scrollbar (minimal, matches neutral palette) ───────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-neutral-100); }
+::-webkit-scrollbar-thumb {
+  background:    var(--color-neutral-300);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+
+/* ─── Selection color ────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-primary-100);
+  color:            var(--color-primary-900);
+}
+
+/* ─── Spinner keyframe (used by Button isLoading) ────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 
 body {
   background: var(--background);

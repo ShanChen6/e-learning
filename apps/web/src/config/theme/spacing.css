@@ -1,0 +1,30 @@
+/*
+ * Spacing utilities – eLearning
+ *
+ * Figma corner-radius values found: 2, 6, 8, 20, 38–51 (pill), 60, 80px
+ * Tailwind v4 base unit: --spacing = 4px  →  scale-N = N × 4px
+ *
+ * Scale reference:
+ *   scale-1  =  4px    scale-2  =  8px    scale-3  = 12px
+ *   scale-4  = 16px    scale-5  = 20px    scale-6  = 24px
+ *   scale-8  = 32px    scale-10 = 40px    scale-12 = 48px
+ *   scale-16 = 64px    scale-20 = 80px    scale-24 = 96px
+ *   scale-32 = 128px
+ */
+
+/* ─── Named spacing scale ──────────────────────────────────────────── */
+@utility spacing-xxs  { @apply scale-1;  }   /*  4px */
+@utility spacing-xs   { @apply scale-2;  }   /*  8px */
+@utility spacing-sm   { @apply scale-3;  }   /* 12px */
+@utility spacing-md   { @apply scale-4;  }   /* 16px */
+@utility spacing-lg   { @apply scale-5;  }   /* 20px */
+@utility spacing-xl   { @apply scale-6;  }   /* 24px */
+@utility spacing-xxl  { @apply scale-8;  }   /* 32px */
+@utility spacing-3xl  { @apply scale-10; }   /* 40px */
+@utility spacing-4xl  { @apply scale-12; }   /* 48px */
+@utility spacing-5xl  { @apply scale-16; }   /* 64px */
+@utility spacing-6xl  { @apply scale-20; }   /* 80px */
+@utility spacing-7xl  { @apply scale-24; }   /* 96px */
+@utility spacing-8xl  { @apply scale-32; }   /* 128px */
+
+/* Border-radius tokens moved to radius.css */

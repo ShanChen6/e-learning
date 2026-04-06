@@ -1,0 +1,234 @@
+/*
+ * Layout utilities – eLearning
+ *
+ * Consumes tokens from:
+ *   spacing.css  → --spacing (4px base), scale-*
+ *   color.css    → --app-*, --color-surface-*, --color-border-*
+ *   radius.css   → --radius-card, --radius-widget
+ *   shadow.css   → --shadow-card, --shadow-card-hover, --shadow-popover
+ *   typography.css → text-h1-*, text-body-*
+ */
+
+/* ══════════════════════════════════════════════════════════════════
+   CONTAINER
+   ══════════════════════════════════════════════════════════════════ */
+
+/*
+ * Responsive max-width breakpoints:
+ *   sm  ≥ 640px   → px-6  (24px)
+ *   md  ≥ 768px   → px-8  (32px)
+ *   lg  ≥ 1024px  → px-10 (40px)
+ *   xl  ≥ 1280px  → px-12 (48px)
+ *   2xl ≥ 1536px  → max-w-[1528px] (Figma: 1920 − 2×196px margins)
+ *
+ * Figma audit: content area = 1920 − (196×2) = 1528px
+ * container-custom updated from 1280px → 1528px to match Figma layout.
+ */
+@utility container-custom {
+  width:          100%;
+  margin-inline:  auto;
+  padding-inline: calc(var(--spacing) * 6);   /* 24px default */
+  max-width:      1528px;  /* Figma: 1920 - 196px × 2 margins */
+}
+
+@utility container-narrow {
+  width:          100%;
+  margin-inline:  auto;
+  padding-inline: calc(var(--spacing) * 4);
+  max-width:      768px;
+}
+
+@utility container-wide {
+  width:          100%;
+  margin-inline:  auto;
+  padding-inline: calc(var(--spacing) * 4);
+  max-width:      1920px;  /* Full bleed (Header, Explore Course bg) */
+}
+
+/* ── Responsive padding widens at larger viewports ───────────────── */
+@media (min-width: 640px) {
+  .container-custom { padding-inline: calc(var(--spacing) * 8);  }  /* 32px */
+  .container-narrow { padding-inline: calc(var(--spacing) * 6);  }
+  .container-wide   { padding-inline: calc(var(--spacing) * 6);  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom { padding-inline: calc(var(--spacing) * 12); }  /* 48px */
+  .container-narrow { padding-inline: calc(var(--spacing) * 8);  }
+  .container-wide   { padding-inline: calc(var(--spacing) * 8);  }
+}
+
+@media (min-width: 1280px) {
+  .container-custom { padding-inline: calc(var(--spacing) * 16); }  /* 64px  */
+  .container-wide   { padding-inline: calc(var(--spacing) * 12); }
+}
+
+@media (min-width: 1536px) {
+  /* At 1920px canvas: 196px fixed margin each side ≈ scale-49 → approximate with 64px+auto */
+  .container-custom { padding-inline: calc(var(--spacing) * 24); }  /* 96px  – approach 196px for ≥1920 screens */
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SECTION SPACING
+   Vertical rhythm between page sections (matches Figma ~80px gaps)
+   ══════════════════════════════════════════════════════════════════ */
+
+@utility section-spacing {
+  padding-block: calc(var(--spacing) * 16);     /* 64px  */
+}
+
+@utility section-spacing-sm {
+  padding-block: calc(var(--spacing) * 10);     /* 40px  */
+}
+
+@utility section-spacing-lg {
+  padding-block: calc(var(--spacing) * 20);     /* 80px  – Figma section gap */
+}
+
+@utility section-spacing-xl {
+  padding-block: calc(var(--spacing) * 32);     /* 128px – hero sections     */
+}
+
+/* Inner section gap (between heading and content) */
+@utility section-gap {
+  display:        flex;
+  flex-direction: column;
+  gap:            calc(var(--spacing) * 10);    /* 40px */
+}
+
+@utility section-gap-sm {
+  display:        flex;
+  flex-direction: column;
+  gap:            calc(var(--spacing) * 6);     /* 24px */
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CARD
+   ══════════════════════════════════════════════════════════════════ */
+
+@utility card-base {
+  background-color: var(--app-surface);
+  border:           1px solid var(--app-border);
+  border-radius:    var(--radius-card);           /* 20px */
+  padding:          calc(var(--spacing) * 6);     /* 24px */
+  box-shadow:       var(--shadow-card);
+  transition:       box-shadow 200ms ease, transform 200ms ease;
+}
+
+@utility card-base-sm {
+  background-color: var(--app-surface);
+  border:           1px solid var(--app-border);
+  border-radius:    var(--radius-widget);         /* 12px */
+  padding:          calc(var(--spacing) * 4);     /* 16px */
+  box-shadow:       var(--shadow-card);
+  transition:       box-shadow 200ms ease, transform 200ms ease;
+}
+
+@utility card-base-lg {
+  background-color: var(--app-surface);
+  border:           1px solid var(--app-border);
+  border-radius:    var(--radius-card);           /* 20px */
+  padding:          calc(var(--spacing) * 8);     /* 32px */
+  box-shadow:       var(--shadow-card);
+  transition:       box-shadow 200ms ease, transform 200ms ease;
+}
+
+/* Hover lift (apply on interactive cards) */
+@utility card-interactive {
+  cursor: pointer;
+}
+
+@layer components {
+  .card-interactive:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform:  translateY(-2px);
+  }
+
+  .card-interactive:focus-visible {
+    outline:        2px solid var(--app-ring);
+    outline-offset: 2px;
+  }
+
+  /* ─── Card header / body / footer slots ─────────────────────── */
+  .card-header {
+    padding-bottom:  calc(var(--spacing) * 4);    /* 16px */
+    border-bottom:   1px solid var(--app-border);
+    margin-bottom:   calc(var(--spacing) * 4);
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    gap:             calc(var(--spacing) * 3);     /* 12px */
+  }
+
+  .card-body {
+    display:         flex;
+    flex-direction:  column;
+    gap:             calc(var(--spacing) * 4);     /* 16px */
+  }
+
+  .card-footer {
+    padding-top:     calc(var(--spacing) * 4);
+    border-top:      1px solid var(--app-border);
+    margin-top:      calc(var(--spacing) * 4);
+    display:         flex;
+    align-items:     center;
+    justify-content: flex-end;
+    gap:             calc(var(--spacing) * 3);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   GRID LAYOUTS
+   Common column grids used in e-learning UIs (courses, instructors)
+   ══════════════════════════════════════════════════════════════════ */
+
+@utility grid-courses {
+  display:               grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap:                   calc(var(--spacing) * 6);  /* 24px */
+}
+
+@media (min-width: 640px) {
+  .grid-courses { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .grid-courses { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1280px) {
+  .grid-courses { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@utility grid-features {
+  display:               grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap:                   calc(var(--spacing) * 8);  /* 32px */
+}
+
+@media (min-width: 768px) {
+  .grid-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .grid-features { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   DIVIDER
+   ══════════════════════════════════════════════════════════════════ */
+
+@utility divider {
+  width:            100%;
+  height:           1px;
+  background-color: var(--app-border);
+  border:           none;
+  margin-block:     calc(var(--spacing) * 6);   /* 24px */
+}
+
+@utility divider-y {
+  width:            1px;
+  align-self:       stretch;
+  background-color: var(--app-border);
+  margin-inline:    calc(var(--spacing) * 4);   /* 16px */
+}

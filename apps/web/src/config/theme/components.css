@@ -1,0 +1,324 @@
+/*
+ * Component base classes – eLearning
+ *
+ * Consumes tokens from:
+ *   color.css    → --color-*, --app-*
+ *   font-size.css → --font-size-*, --leading-*, --font-weight-*
+ *   typography.css → text-button-*, text-caption-*, text-body-*
+ *   spacing.css  → scale-* (--spacing = 4px)
+ *   radius.css   → --radius-*
+ *   shadow.css   → --shadow-*
+ */
+
+/* ══════════════════════════════════════════════════════════════════
+   BUTTON
+   Usage:  <button class="btn-primary">Label</button>
+           <button class="btn-secondary btn-sm">Label</button>
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─── Shared base ────────────────────────────────────────────────── */
+@utility btn-base {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             calc(var(--spacing) * 2);       /* 8px  */
+  padding:         calc(var(--spacing) * 3) calc(var(--spacing) * 6); /* 12px 24px */
+  border-radius:   var(--radius-btn);
+  border:          1.5px solid transparent;
+  font-family:     var(--font-sans);
+  font-size:       var(--font-size-md);             /* 18px */
+  line-height:     var(--leading-md);               /* 24px */
+  font-weight:     var(--font-weight-semibold);
+  letter-spacing:  var(--tracking-wide);
+  text-decoration: none;
+  cursor:          pointer;
+  transition:      background-color 150ms ease, color 150ms ease,
+                   border-color 150ms ease, box-shadow 150ms ease,
+                   opacity 150ms ease;
+  outline:         none;
+  white-space:     nowrap;
+  user-select:     none;
+}
+
+/* ─── Size modifiers ─────────────────────────────────────────────── */
+@utility btn-sm {
+  padding:    calc(var(--spacing) * 2) calc(var(--spacing) * 4); /* 8px 16px  */
+  font-size:  var(--font-size-base);                              /* 16px      */
+  gap:        calc(var(--spacing) * 1.5);                         /* 6px       */
+}
+
+@utility btn-lg {
+  padding:    calc(var(--spacing) * 4) calc(var(--spacing) * 8); /* 16px 32px */
+  font-size:  var(--font-size-lg);                                /* 20px      */
+  gap:        calc(var(--spacing) * 2.5);                         /* 10px      */
+}
+
+/* ─── Primary ────────────────────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    @apply btn-base;
+    background-color: var(--color-surface-brand-default);
+    color:            var(--color-text-neutral-inverse);
+    border-color:     var(--color-surface-brand-default);
+    box-shadow:       var(--shadow-btn);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--color-surface-brand-hover);
+    border-color:     var(--color-surface-brand-hover);
+    box-shadow:       var(--shadow-brand-md);
+  }
+
+  .btn-primary:focus-visible {
+    outline:        2px solid var(--app-ring);
+    outline-offset: 3px;
+  }
+
+  .btn-primary:disabled {
+    background-color: var(--color-surface-brand-disabled);
+    border-color:     var(--color-surface-brand-disabled);
+    box-shadow:       none;
+    cursor:           not-allowed;
+    opacity:          0.6;
+  }
+
+  /* ─── Secondary (Teal) ─────────────────────────────────────────── */
+  .btn-secondary {
+    @apply btn-base;
+    background-color: var(--color-surface-teal-default);
+    color:            var(--color-text-neutral-inverse);
+    border-color:     var(--color-surface-teal-default);
+    box-shadow:       var(--shadow-teal-sm);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-surface-teal-hover);
+    border-color:     var(--color-surface-teal-hover);
+    box-shadow:       var(--shadow-teal-md);
+  }
+
+  .btn-secondary:focus-visible {
+    outline:        2px solid var(--color-border-teal-focus);
+    outline-offset: 3px;
+  }
+
+  .btn-secondary:disabled {
+    background-color: var(--color-surface-teal-disabled);
+    border-color:     var(--color-surface-teal-disabled);
+    box-shadow:       none;
+    cursor:           not-allowed;
+    opacity:          0.6;
+  }
+
+  /* ─── Outline ──────────────────────────────────────────────────── */
+  .btn-outline {
+    @apply btn-base;
+    background-color: transparent;
+    color:            var(--color-text-brand-primary);
+    border-color:     var(--color-border-brand-default);
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    background-color: var(--color-surface-brand-secondary-hover);
+    border-color:     var(--color-border-brand-hover);
+  }
+
+  .btn-outline:focus-visible {
+    outline:        2px solid var(--app-ring);
+    outline-offset: 3px;
+  }
+
+  .btn-outline:disabled {
+    color:        var(--color-text-brand-disabled);
+    border-color: var(--color-border-brand-disabled);
+    cursor:       not-allowed;
+    opacity:      0.6;
+  }
+
+  /* ─── Ghost ────────────────────────────────────────────────────── */
+  .btn-ghost {
+    @apply btn-base;
+    background-color: transparent;
+    color:            var(--color-text-neutral-secondary);
+    border-color:     transparent;
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--color-surface-neutral-secondary-hover);
+    color:            var(--color-text-neutral-primary);
+  }
+
+  .btn-ghost:focus-visible {
+    outline:        2px solid var(--app-ring);
+    outline-offset: 3px;
+  }
+
+  .btn-ghost:disabled {
+    color:  var(--color-text-neutral-disabled);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   INPUT
+   Usage:  <input class="input-base" />
+           <input class="input-base input-error" />
+   ══════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  .input-base {
+    display:          block;
+    width:            100%;
+    padding:          calc(var(--spacing) * 3) calc(var(--spacing) * 4); /* 12px 16px */
+    background-color: var(--app-surface);
+    color:            var(--color-text-neutral-primary);
+    border:           1.5px solid var(--app-input);
+    border-radius:    var(--radius-input);             /* 20px */
+    font-family:      var(--font-sans);
+    font-size:        var(--font-size-md);             /* 18px */
+    line-height:      var(--leading-xl);               /* 32px */
+    font-weight:      var(--font-weight-regular);
+    letter-spacing:   var(--tracking-wide);
+    box-shadow:       var(--shadow-input);
+    transition:       border-color 150ms ease, box-shadow 150ms ease;
+    outline:          none;
+  }
+
+  .input-base::placeholder {
+    color:  var(--color-text-neutral-tertiary);
+    opacity: 1;
+  }
+
+  .input-base:hover:not(:disabled):not(:focus) {
+    border-color: var(--color-border-neutral-hover);
+  }
+
+  .input-base:focus {
+    border-color: var(--color-border-brand-focus);
+    box-shadow:   0 0 0 3px var(--app-ring),
+                  var(--shadow-input);
+  }
+
+  .input-base:disabled {
+    background-color: var(--color-surface-neutral-disabled);
+    color:            var(--color-text-neutral-disabled);
+    border-color:     var(--color-border-neutral-disabled);
+    cursor:           not-allowed;
+  }
+
+  /* ─── Input state variants ───────────────────────────────────── */
+  .input-error {
+    border-color: var(--color-border-error-default);
+  }
+
+  .input-error:focus {
+    border-color: var(--color-border-error-focus);
+    box-shadow:   0 0 0 3px rgba(241, 60, 60, 0.20),
+                  var(--shadow-input);
+  }
+
+  .input-success {
+    border-color: var(--color-border-success-default);
+  }
+
+  .input-success:focus {
+    border-color: var(--color-border-success-focus);
+    box-shadow:   0 0 0 3px rgba(52, 231, 165, 0.20),
+                  var(--shadow-input);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BADGE
+   Usage:  <span class="badge badge-success">Active</span>
+           <span class="badge badge-error badge-lg">Failed</span>
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─── Shared base ────────────────────────────────────────────────── */
+@utility badge {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            calc(var(--spacing) * 1);   /* 4px  */
+  padding:        calc(var(--spacing) * 0.5) calc(var(--spacing) * 2); /* 2px 8px */
+  border-radius:  var(--radius-badge);         /* 6px  */
+  border:         1px solid transparent;
+  font-family:    var(--font-display);
+  font-size:      var(--font-size-xs);         /* 12px */
+  line-height:    var(--leading-xs);           /* 16px */
+  font-weight:    var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  white-space:    nowrap;
+}
+
+@utility badge-lg {
+  padding:   calc(var(--spacing) * 1) calc(var(--spacing) * 3); /* 4px 12px */
+  font-size: var(--font-size-2xs);                                /* 10px... uses --font-size-xs = 12px */
+}
+
+/* ─── Color variants ─────────────────────────────────────────────── */
+@layer components {
+  .badge-success {
+    @apply badge;
+    background-color: var(--color-green-50);
+    color:            var(--color-text-success-default);
+    border-color:     var(--color-border-success-disabled);
+  }
+
+  .badge-error {
+    @apply badge;
+    background-color: var(--color-red-50);
+    color:            var(--color-text-error-default);
+    border-color:     var(--color-border-error-disabled);
+  }
+
+  .badge-warning {
+    @apply badge;
+    background-color: var(--color-yellow-50);
+    color:            var(--color-text-warning-default);
+    border-color:     var(--color-border-warning-disabled);
+  }
+
+  .badge-brand {
+    @apply badge;
+    background-color: var(--color-primary-50);
+    color:            var(--color-text-brand-primary);
+    border-color:     var(--color-border-brand-disabled);
+  }
+
+  .badge-teal {
+    @apply badge;
+    background-color: var(--color-teal-50);
+    color:            var(--color-teal-700);
+    border-color:     var(--color-teal-200);
+  }
+
+  .badge-neutral {
+    @apply badge;
+    background-color: var(--color-neutral-100);
+    color:            var(--color-text-neutral-secondary);
+    border-color:     var(--color-neutral-200);
+  }
+
+  /* Solid / filled badge variant (e.g. for counts / scores) */
+  .badge-success-solid {
+    @apply badge;
+    background-color: var(--color-surface-success-default);
+    color:            var(--color-white);
+    border-color:     transparent;
+  }
+
+  .badge-error-solid {
+    @apply badge;
+    background-color: var(--color-surface-error-default);
+    color:            var(--color-white);
+    border-color:     transparent;
+  }
+
+  .badge-brand-solid {
+    @apply badge;
+    background-color: var(--color-surface-brand-default);
+    color:            var(--color-white);
+    border-color:     transparent;
+  }
+}
