@@ -1,0 +1,13 @@
+@reference '../../config/theme/index.css';
+
+.badge { @apply badge; }
+
+.badge_success { background-color: var(--color-green-50); color: var(--color-text-success-default); border-color: var(--color-border-success-disabled); }
+.badge_error { background-color: var(--color-red-50); color: var(--color-text-error-default); border-color: var(--color-border-error-disabled); }
+.badge_warning { background-color: var(--color-yellow-50); color: var(--color-text-warning-default); border-color: var(--color-border-warning-disabled); }
+.badge_brand { background-color: var(--color-primary-50); color: var(--color-text-brand-primary); border-color: var(--color-border-brand-disabled); }
+.badge_teal { background-color: var(--color-teal-50); color: var(--color-teal-700); border-color: var(--color-teal-200); }
+.badge_neutral { background-color: var(--color-neutral-100); color: var(--color-text-neutral-secondary); border-color: var(--color-neutral-200); }
+
+.badge_sm { padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 2); font-size: var(--font-size-2xs); }
+.badge_md { padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2); font-size: var(--font-size-xs); }

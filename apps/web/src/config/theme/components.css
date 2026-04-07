@@ -193,16 +193,26 @@
   }
 }
 
-/* ─── Shared hover handling using local component variables ─────── */
+/* ─── Hover: filled buttons — switch to hover color token ───────── */
 @layer components {
   .btn-primary:hover:not(:disabled),
-  .btn-secondary:hover:not(:disabled),
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--btn-bg-hover, var(--btn-bg));
+    border-color:     var(--btn-border-hover, var(--btn-border));
+    box-shadow:       var(--btn-shadow-hover, var(--btn-shadow));
+    color:            var(--btn-text-hover, var(--btn-text, inherit));
+  }
+}
+
+/* ─── Hover: ghost & outline — subtle opacity fade ───────────────── */
+@layer components {
   .btn-outline:hover:not(:disabled),
   .btn-ghost:hover:not(:disabled) {
     background-color: var(--btn-bg-hover, var(--btn-bg));
     border-color:     var(--btn-border-hover, var(--btn-border));
     box-shadow:       var(--btn-shadow-hover, var(--btn-shadow));
     color:            var(--btn-text-hover, var(--btn-text, inherit));
+    opacity:          0.85;
   }
 }
 

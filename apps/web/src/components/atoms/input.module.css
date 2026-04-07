@@ -1,0 +1,7 @@
+@reference '../../config/theme/index.css';
+
+.input {
+  @apply input-base;
+}
+
+.input:focus { box-shadow: 0 0 0 3px var(--app-ring), var(--shadow-input); }

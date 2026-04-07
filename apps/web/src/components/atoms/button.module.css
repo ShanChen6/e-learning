@@ -1,0 +1,84 @@
+@reference '../../config/theme/index.css';
+
+.btn {
+  @apply btn-base;
+}
+
+.btn_primary {
+  --btn-bg: var(--color-surface-brand-default);
+  --btn-bg-hover: var(--color-surface-brand-hover);
+  --btn-text: var(--color-text-neutral-inverse);
+  --btn-border: var(--color-surface-brand-default);
+  --btn-border-hover: var(--color-surface-brand-hover);
+  --btn-shadow: var(--shadow-btn);
+  --btn-shadow-hover: var(--shadow-brand-md);
+
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn_secondary {
+  --btn-bg: var(--color-surface-teal-default);
+  --btn-bg-hover: var(--color-surface-teal-hover);
+  --btn-text: var(--color-text-neutral-inverse);
+  --btn-border: var(--color-surface-teal-default);
+  --btn-border-hover: var(--color-surface-teal-hover);
+  --btn-shadow: var(--shadow-teal-sm);
+  --btn-shadow-hover: var(--shadow-teal-md);
+
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn_outline {
+  --btn-bg: transparent;
+  --btn-bg-hover: var(--color-surface-brand-secondary-hover);
+  --btn-text: var(--color-text-brand-primary);
+  --btn-border: var(--color-border-brand-default);
+  --btn-border-hover: var(--color-border-brand-hover);
+  --btn-shadow: none;
+
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
+}
+
+.btn_ghost {
+  --btn-bg: transparent;
+  --btn-bg-hover: var(--color-surface-neutral-secondary-hover);
+  --btn-text: var(--color-text-neutral-secondary);
+  --btn-text-hover: var(--color-text-neutral-primary);
+  --btn-border: transparent;
+  --btn-shadow: none;
+
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-border);
+}
+
+.btn_sm { padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4); font-size: var(--font-size-base); }
+.btn_md { padding: calc(var(--spacing) * 3) calc(var(--spacing) * 6); font-size: var(--font-size-md); }
+.btn_lg { padding: calc(var(--spacing) * 4) calc(var(--spacing) * 8); font-size: var(--font-size-lg); }
+
+/* Filled: switch to hover color token, no opacity change */
+.btn_primary:hover:not(:disabled),
+.btn_secondary:hover:not(:disabled) {
+  background-color: var(--btn-bg-hover, var(--btn-bg));
+  border-color: var(--btn-border-hover, var(--btn-border));
+  box-shadow: var(--btn-shadow-hover, var(--btn-shadow));
+  color: var(--btn-text-hover, var(--btn-text, inherit));
+}
+
+/* Ghost & Outline: subtle opacity fade */
+.btn_outline:hover:not(:disabled),
+.btn_ghost:hover:not(:disabled) {
+  background-color: var(--btn-bg-hover, var(--btn-bg));
+  border-color: var(--btn-border-hover, var(--btn-border));
+  box-shadow: var(--btn-shadow-hover, var(--btn-shadow));
+  color: var(--btn-text-hover, var(--btn-text, inherit));
+  opacity: 0.85;
+}
