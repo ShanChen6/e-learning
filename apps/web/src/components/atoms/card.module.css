@@ -1,0 +1,5 @@
+@reference '../../config/theme/index.css';
+
+.card { @apply card-base; }
+.card_sm { padding: calc(var(--spacing) * 4); }
+.card_lg { padding: calc(var(--spacing) * 8); }
