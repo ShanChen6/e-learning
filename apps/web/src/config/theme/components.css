@@ -40,6 +40,12 @@
   user-select:     none;
 }
 
+/* ─── Base layer: apply utilities as defaults for elements ──────── */
+@layer base {
+  button { @apply btn-base; }
+  input, textarea, select { @apply input-base; }
+}
+
 /* ─── Size modifiers ─────────────────────────────────────────────── */
 @utility btn-sm {
   padding:    calc(var(--spacing) * 2) calc(var(--spacing) * 4); /* 8px 16px  */
@@ -53,20 +59,41 @@
   gap:        calc(var(--spacing) * 2.5);                         /* 10px      */
 }
 
+/* ─── Input base utility (so we can @apply it globally) ─────────── */
+@utility input-base {
+  display:          block;
+  width:            100%;
+  padding:          calc(var(--spacing) * 3) calc(var(--spacing) * 4); /* 12px 16px */
+  background-color: var(--app-surface);
+  color:            var(--color-text-neutral-primary);
+  border:           1.5px solid var(--app-input);
+  border-radius:    var(--radius-input);             /* 20px */
+  font-family:      var(--font-sans);
+  font-size:        var(--font-size-md);             /* 18px */
+  line-height:      var(--leading-xl);               /* 32px */
+  font-weight:      var(--font-weight-regular);
+  letter-spacing:   var(--tracking-wide);
+  box-shadow:       var(--shadow-input);
+  transition:       border-color 150ms ease, box-shadow 150ms ease;
+  outline:          none;
+}
+
 /* ─── Primary ────────────────────────────────────────────────────── */
 @layer components {
   .btn-primary {
     @apply btn-base;
-    background-color: var(--color-surface-brand-default);
-    color:            var(--color-text-neutral-inverse);
-    border-color:     var(--color-surface-brand-default);
-    box-shadow:       var(--shadow-btn);
-  }
+    --btn-bg:         var(--color-surface-brand-default);
+    --btn-bg-hover:   var(--color-surface-brand-hover);
+    --btn-text:       var(--color-text-neutral-inverse);
+    --btn-border:     var(--color-surface-brand-default);
+    --btn-border-hover: var(--color-surface-brand-hover);
+    --btn-shadow:     var(--shadow-btn);
+    --btn-shadow-hover: var(--shadow-brand-md);
 
-  .btn-primary:hover:not(:disabled) {
-    background-color: var(--color-surface-brand-hover);
-    border-color:     var(--color-surface-brand-hover);
-    box-shadow:       var(--shadow-brand-md);
+    background-color: var(--btn-bg);
+    color:            var(--btn-text);
+    border-color:     var(--btn-border);
+    box-shadow:       var(--btn-shadow);
   }
 
   .btn-primary:focus-visible {
@@ -85,16 +112,18 @@
   /* ─── Secondary (Teal) ─────────────────────────────────────────── */
   .btn-secondary {
     @apply btn-base;
-    background-color: var(--color-surface-teal-default);
-    color:            var(--color-text-neutral-inverse);
-    border-color:     var(--color-surface-teal-default);
-    box-shadow:       var(--shadow-teal-sm);
-  }
+    --btn-bg:         var(--color-surface-teal-default);
+    --btn-bg-hover:   var(--color-surface-teal-hover);
+    --btn-text:       var(--color-text-neutral-inverse);
+    --btn-border:     var(--color-surface-teal-default);
+    --btn-border-hover: var(--color-surface-teal-hover);
+    --btn-shadow:     var(--shadow-teal-sm);
+    --btn-shadow-hover: var(--shadow-teal-md);
 
-  .btn-secondary:hover:not(:disabled) {
-    background-color: var(--color-surface-teal-hover);
-    border-color:     var(--color-surface-teal-hover);
-    box-shadow:       var(--shadow-teal-md);
+    background-color: var(--btn-bg);
+    color:            var(--btn-text);
+    border-color:     var(--btn-border);
+    box-shadow:       var(--btn-shadow);
   }
 
   .btn-secondary:focus-visible {
@@ -113,14 +142,16 @@
   /* ─── Outline ──────────────────────────────────────────────────── */
   .btn-outline {
     @apply btn-base;
-    background-color: transparent;
-    color:            var(--color-text-brand-primary);
-    border-color:     var(--color-border-brand-default);
-  }
+    --btn-bg:           transparent;
+    --btn-bg-hover:     var(--color-surface-brand-secondary-hover);
+    --btn-text:         var(--color-text-brand-primary);
+    --btn-border:       var(--color-border-brand-default);
+    --btn-border-hover: var(--color-border-brand-hover);
+    --btn-shadow:       none;
 
-  .btn-outline:hover:not(:disabled) {
-    background-color: var(--color-surface-brand-secondary-hover);
-    border-color:     var(--color-border-brand-hover);
+    background-color: var(--btn-bg);
+    color:            var(--btn-text);
+    border-color:     var(--btn-border);
   }
 
   .btn-outline:focus-visible {
@@ -138,14 +169,16 @@
   /* ─── Ghost ────────────────────────────────────────────────────── */
   .btn-ghost {
     @apply btn-base;
-    background-color: transparent;
-    color:            var(--color-text-neutral-secondary);
-    border-color:     transparent;
-  }
+    --btn-bg:           transparent;
+    --btn-bg-hover:     var(--color-surface-neutral-secondary-hover);
+    --btn-text:         var(--color-text-neutral-secondary);
+    --btn-text-hover:   var(--color-text-neutral-primary);
+    --btn-border:       transparent;
+    --btn-shadow:       none;
 
-  .btn-ghost:hover:not(:disabled) {
-    background-color: var(--color-surface-neutral-secondary-hover);
-    color:            var(--color-text-neutral-primary);
+    background-color: var(--btn-bg);
+    color:            var(--btn-text);
+    border-color:     var(--btn-border);
   }
 
   .btn-ghost:focus-visible {
@@ -160,6 +193,19 @@
   }
 }
 
+/* ─── Shared hover handling using local component variables ─────── */
+@layer components {
+  .btn-primary:hover:not(:disabled),
+  .btn-secondary:hover:not(:disabled),
+  .btn-outline:hover:not(:disabled),
+  .btn-ghost:hover:not(:disabled) {
+    background-color: var(--btn-bg-hover, var(--btn-bg));
+    border-color:     var(--btn-border-hover, var(--btn-border));
+    box-shadow:       var(--btn-shadow-hover, var(--btn-shadow));
+    color:            var(--btn-text-hover, var(--btn-text, inherit));
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════════
    INPUT
    Usage:  <input class="input-base" />
@@ -168,21 +214,7 @@
 
 @layer components {
   .input-base {
-    display:          block;
-    width:            100%;
-    padding:          calc(var(--spacing) * 3) calc(var(--spacing) * 4); /* 12px 16px */
-    background-color: var(--app-surface);
-    color:            var(--color-text-neutral-primary);
-    border:           1.5px solid var(--app-input);
-    border-radius:    var(--radius-input);             /* 20px */
-    font-family:      var(--font-sans);
-    font-size:        var(--font-size-md);             /* 18px */
-    line-height:      var(--leading-xl);               /* 32px */
-    font-weight:      var(--font-weight-regular);
-    letter-spacing:   var(--tracking-wide);
-    box-shadow:       var(--shadow-input);
-    transition:       border-color 150ms ease, box-shadow 150ms ease;
-    outline:          none;
+    @apply input-base;
   }
 
   .input-base::placeholder {
